@@ -1,21 +1,15 @@
 import sys
 from usage_information import *
 
-list_of_tasks = ['Walk the dog', 'Buy milk', 'Do homework']
-# list_of_tasks = []
-
 def eat_userinput():
     if sys.argv[-1] == 'main_modul.py':
         print_usage_information()
-    elif sys.argv[1] == '-l' and list_of_tasks != []:
+    elif sys.argv[1] == '-l':
         print_list()
-    elif sys.argv[1] == '-l' and list_of_tasks == []:
-        print('No todos for today!')
-    elif sys.argv[1] == '-a' and sys.argv[2] != []:
-        print(add_task())
-        print(list_of_tasks)
-    elif sys.argv[-1] == '-a':
+    elif sys.argv[-1] == '-a' and len(sys.argv) == 2:
         print('Unable to add: no task provided')
+    elif sys.argv[1] == '-a' and len(sys.argv) > 2:
+        add_task()
     elif sys.argv[1] == '-r':
         print('Remove a task')
     elif sys.argv[1] == '-c':
@@ -25,11 +19,18 @@ def eat_userinput():
         print_usage_information()
 
 def print_list():
-    for i in range(len(list_of_tasks)):
-        print(str(i + 1) + ' - ' + list_of_tasks[i])
+    temp = open('list.txt', 'r')
+    tasks = temp.readlines()
+    if len(tasks) < 1:
+        print('No todos for today!')
+    for i in range(len(tasks)):
+        print(str(i + 1) + ' - ' + tasks[i], end = '')
+    temp.close()
 
 def add_task():
-    list_of_tasks.append(sys.argv[2])
-    return list_of_tasks
+    temp = open('list.txt', 'a')
+    temp.write('\n')    
+    temp.write(sys.argv[2])
+    temp.close()
 
 eat_userinput()
