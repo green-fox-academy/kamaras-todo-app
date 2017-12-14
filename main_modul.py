@@ -11,7 +11,7 @@ def eat_userinput():
     elif sys.argv[1] == '-a' and len(sys.argv) > 2:
         add_task()
     elif sys.argv[1] == '-r':
-        print('Remove a task')
+        remove_task()
     elif sys.argv[1] == '-c':
         print('Completes a task')
     else:
@@ -33,4 +33,16 @@ def add_task():
     temp.write(sys.argv[2])
     temp.close()
 
+def remove_task():
+    temp = open('list.txt', 'r')
+    tasks = temp.readlines()
+    to_remove = tasks[int(sys.argv[2]) - 1]
+    temp.close()
+
+    temp = open('list.txt', 'w')
+    for line in tasks:
+        if line != to_remove:
+            temp.write(line)
+    temp.close()
+            
 eat_userinput()
