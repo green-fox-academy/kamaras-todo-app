@@ -4,7 +4,8 @@ from usage_information import Usage
 class Todo():
 
     def __init__(self):
-        pass
+        list = open('list.txt', 'a')
+        list.close()
 
     def eat_userinput(self):
         if sys.argv[-1] == 'main_modul.py':
@@ -19,13 +20,16 @@ class Todo():
             print('Unable to remove: no index provided')
         elif sys.argv[1] == '-r' and len(sys.argv) > 2 and sys.argv[2].isalpha():
             print('Unable to remove: index is not a number')
-        elif sys.argv[1] == '-r' and len(sys.argv) > 2:
-            self.remove_task()
-        elif sys.argv[1] == '-c':
+        try:
+            if sys.argv[1] == '-r' and len(sys.argv) > 2:
+                self.remove_task()
+        except IndexError:
+            return print('Unable to remove: index is out of bound')
+        if sys.argv[1] == '-c':
             print('Completes a task')
         else:
             print('\nType a valid argument!')
-            print_usage_information()
+            Usage.print_usage_information(self)
 
     def print_list(self):
         temp = open('list.txt', 'r')
