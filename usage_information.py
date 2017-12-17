@@ -12,6 +12,3 @@ class Usage():
             '-a   Adds a new task\n'
             '-r   Removes a task\n'
             '-c   Completes a task')
-        
-# object = Usage()
-# print(object.print_usage_information())

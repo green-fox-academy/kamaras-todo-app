@@ -1,6 +1,6 @@
 class PrintList():
 
-    def __init__():
+    def __init__(self):
         pass
 
     def print_list(self):

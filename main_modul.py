@@ -1,5 +1,7 @@
 import sys
-import print_list
+from remove_task import RemoveTask
+from print_list import PrintList
+from add_task import AddTask
 from usage_information import Usage
 
 class Todo():
@@ -10,47 +12,28 @@ class Todo():
 
     def eat_userinput(self):
         if sys.argv[-1] == 'main_modul.py':
-            print(Usage.print_usage_information(self))
+            return print(Usage.print_usage_information(self))
         elif sys.argv[1] == '-l':
-            PrintList.print_list()
+            PrintList.print_list(self)
 
         elif sys.argv[-1] == '-a' and len(sys.argv) == 2:
-            print('Unable to add: no task provided')
+            return print('Unable to add: no task provided')
         elif sys.argv[1] == '-a' and len(sys.argv) > 2:
-            self.add_task()
+            AddTask.add_task(self)
 
         elif sys.argv[-1] == '-r' and len(sys.argv) == 2:
-            print('Unable to remove: no index provided')
+            return print('Unable to remove: no index provided')
         elif sys.argv[1] == '-r' and len(sys.argv) > 2 and sys.argv[2].isalpha():
-            print('Unable to remove: index is not a number')
+            return print('Unable to remove: index is not a number')
+
         try:
-            if sys.argv[1] == '-r' and len(sys.argv) > 2:
-                self.remove_task()
+            if sys.argv[1] == '-r' and len(sys.argv) > 2 and not sys.argv[2].isalpha():
+                RemoveTask.remove_task(self)
         except IndexError:
             return print('Unable to remove: index is out of bound')
 
-        if sys.argv[1] == '-c':
-            print('Completes a task')
-        else:
-            print('\nType a valid argument!')
-            Usage.print_usage_information(self)
-
-    def add_task(self):
-        temp = open('list.txt', 'a')
-        temp.write('\n')    
-        temp.write(sys.argv[2])
-        temp.close()
-
-    def remove_task(self):
-        temp = open('list.txt', 'r')
-        tasks = temp.readlines()
-        to_remove = tasks[int(sys.argv[2]) - 1]
-        temp.close()
-        temp = open('list.txt', 'w')
-        for line in tasks:
-            if line != to_remove:
-                temp.write(line)
-        temp.close()
+        if sys.argv[-1] == '-c':
+            return print('Completes a task')
 
 todo = Todo()
 todo.eat_userinput()

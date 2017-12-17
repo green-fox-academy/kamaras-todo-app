@@ -1,11 +1,13 @@
 import unittest
 from usage_information import Usage
-# import main_modul
-import sys
+# from main_modul import *
 
 my_object = Usage()
 
 class TestUsage(unittest.TestCase):
+
+    def setUp(self):
+        pass
 
     def test_print_usage(self):
         self.assertEqual(my_object.print_usage_information(),
