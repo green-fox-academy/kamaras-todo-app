@@ -4,7 +4,7 @@ class Usage():
         pass
 
     def print_usage_information(self):
-        print(
+        return print(
             '\n'
             'Command Line Todo application\n'
             '=============================\n'
