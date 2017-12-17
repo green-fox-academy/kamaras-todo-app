@@ -7,9 +7,6 @@ my_object = Usage()
 
 class TestUsage(unittest.TestCase):
 
-    def setUp(self):
-        pass
-    
     def test_print_usage(self):
         self.assertEqual(my_object.print_usage_information(),
             '\n'

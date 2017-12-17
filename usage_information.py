@@ -4,16 +4,14 @@ class Usage():
         pass
 
     def print_usage_information(self):
-        return print(
-            '\n'
-            'Command Line Todo application\n'
+        return (
+            '\n' 'Command Line Todo application\n'
             '=============================\n'
-            '\n'        
-            'Command Line arguments\n'
+            '\n''Command Line arguments\n'
             '-l   Lists all the tasks\n'
             '-a   Adds a new task\n'
             '-r   Removes a task\n'
-            '-c   Completes a task'
-        )
-
-# print_usage_information()
+            '-c   Completes a task')
+        
+# object = Usage()
+# print(object.print_usage_information())

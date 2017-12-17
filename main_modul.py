@@ -1,4 +1,5 @@
 import sys
+import print_list
 from usage_information import Usage
 
 class Todo():
@@ -9,13 +10,15 @@ class Todo():
 
     def eat_userinput(self):
         if sys.argv[-1] == 'main_modul.py':
-            Usage.print_usage_information(self)
+            print(Usage.print_usage_information(self))
         elif sys.argv[1] == '-l':
-            self.print_list()
+            PrintList.print_list()
+
         elif sys.argv[-1] == '-a' and len(sys.argv) == 2:
             print('Unable to add: no task provided')
         elif sys.argv[1] == '-a' and len(sys.argv) > 2:
             self.add_task()
+
         elif sys.argv[-1] == '-r' and len(sys.argv) == 2:
             print('Unable to remove: no index provided')
         elif sys.argv[1] == '-r' and len(sys.argv) > 2 and sys.argv[2].isalpha():
@@ -25,20 +28,12 @@ class Todo():
                 self.remove_task()
         except IndexError:
             return print('Unable to remove: index is out of bound')
+
         if sys.argv[1] == '-c':
             print('Completes a task')
         else:
             print('\nType a valid argument!')
             Usage.print_usage_information(self)
-
-    def print_list(self):
-        temp = open('list.txt', 'r')
-        tasks = temp.readlines()
-        if len(tasks) < 1:
-            print('No todos for today!')
-        for i in range(len(tasks)):
-            print(str(i + 1) + ' - ' + tasks[i], end = '')
-        temp.close()
 
     def add_task(self):
         temp = open('list.txt', 'a')
